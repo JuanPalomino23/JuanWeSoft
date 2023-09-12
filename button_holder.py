@@ -7,6 +7,14 @@ class ButtonHolder(QMainWindow):
         
         self.setWindowTitle("Button Holder app!!")
         
-        button = QPushButton("Press me!!")
+        def button_clicked(data):
+         print("You clicked the button, didn't you??" , data)
+         
         
+        button = QPushButton("Press me!!")
         self.setCentralWidget(button)
+        button.setCheckable(True)
+        
+        button.clicked.connect(button_clicked)
+        
+    

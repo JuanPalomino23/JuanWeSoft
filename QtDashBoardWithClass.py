@@ -5,7 +5,8 @@ from button_holder import ButtonHolder
 
         
 app = QApplication(sys.argv)
-
 window = ButtonHolder()
+
+
 window.show()
 app.exec()
