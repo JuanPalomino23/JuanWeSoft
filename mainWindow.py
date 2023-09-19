@@ -1,6 +1,6 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QToolBar
+from PySide6.QtWidgets import QApplication, QMainWindow, QToolBar, QPushButton, QStatusBar
 from PySide6.QtCore import QSize
-from PySide6.QtGui import QAction, QIcon
+from PySide6.QtGui import QAction, QIcon 
 
 class MainWindow(QMainWindow):
     def __init__(self, app):
@@ -31,11 +31,15 @@ class MainWindow(QMainWindow):
         Help_menu = menu_bar.addMenu("Help")
         
         # Working with toolbars
-        toolbar = QToolBar("My main toobal")
+        toolbar = QToolBar("My main toobal") 
         toolbar.setIconSize(QSize(16,16))
         self.addToolBar(toolbar)
         
-        toolbar.addAction(quit_action)### Add toolbar action
+        Quitaction = QAction(QIcon("QuitAction.png"), "Quit action",self)
+        
+        Quitaction.triggered.connect(self.quit_app)
+        
+        toolbar.addAction(Quitaction)### Add toolbar action
         
         action1 = QAction("Some Action", self)
         action1.setStatusTip("Status message for some action")
@@ -50,9 +54,24 @@ class MainWindow(QMainWindow):
         
         toolbar.addAction(action2)### Add toolbar action
         
+        #### Add separator in toolbaar
+        toolbar.addSeparator()
+        toolbar.addWidget(QPushButton('Clik here'))
+        
+        
+        #Working  with statusBar
+        self.setStatusBar(QStatusBar(self))
+        
+        button1 = QPushButton("Butoon 1")
+        button1.clicked.connect(self.button1_clicked)
+        self.setCentralWidget(button1)
+        
+    def button1_clicked(self):
+        self.statusBar().showMessage("Button1 clicked", 1000)
+    
          
     def quit_app(self):
         self.app.quit()
         
     def toolbar_button_click(self):
-        print("action1 triggered")
+        self.statusBar().showMessage("Message from my app",1000)
